@@ -1,1 +1,1 @@
-module.exports = require('./src/views/kin.js')
+module.exports = require('./src/index.js')

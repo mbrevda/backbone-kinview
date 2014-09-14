@@ -28,7 +28,8 @@
   "homepage": "https://github.com/mbrevda/backbone-kinview",
   "dependencies": {
     "backbone": "^1.1.2",
-    "jquery": "^2.1.1"
+    "jquery": "^2.1.1",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {
     "browserify": "^5.11.2",
@@ -36,6 +37,7 @@
     "gulp-jshint": "^1.8.4",
     "jsdom": "^1.0.0-pre.6",
     "mocha": "^1.21.4",
-    "should": "^4.0.4"
+    "should": "^4.0.4",
+    "vinyl-source-stream": "^1.0.0"
   }
 }
