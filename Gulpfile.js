@@ -1,6 +1,8 @@
 var browserify  = require('browserify'),
+    cover	    = require('gulp-coverage'),
     gulp	    = require('gulp'),
     jshint      = require('gulp-jshint'),
+    mocha	    = require('gulp-mocha')
     source	    = require('vinyl-source-stream')
 
 
@@ -29,4 +31,33 @@ gulp.task('lint', function(){
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(jshint.reporter(''))
+})
+
+gulp.task('test', function(){
+    return gulp.src(['test/test*.js'], { read: false })
+        .pipe(mocha({
+            reporter: 'spec',
+            globals: {
+                should: require('should')
+            }
+        }))
+})
+
+
+gulp.task('coverage', function(){
+    return gulp.src(['test/test*.js'], { read: false })
+        .pipe(cover.instrument({
+            pattern: [
+                'src/**'
+            ]
+        }))
+        .pipe(mocha({
+            reporter: 'spec',
+            globals: {
+                should: require('should')
+            }
+        }))
+        .pipe(cover.report({
+            outFile: 'coverage.html'                                 
+        }))
 })
