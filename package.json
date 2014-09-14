@@ -1,0 +1,33 @@
+{
+  "name": "KinView",
+  "version": "0.0.1",
+  "description": "A backbone.js view with built in lifecycle management of child views",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbrevda/backbone-kinview.git"
+  },
+  "keywords": [
+    "backbone",
+    "child",
+    "childview",
+    "children",
+    "collection"
+  ],
+  "author": "mbrevda@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbrevda/backbone-kinview/issues"
+  },
+  "homepage": "https://github.com/mbrevda/backbone-kinview",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "jquery": "^2.1.1"
+  }
+}
