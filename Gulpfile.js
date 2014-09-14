@@ -1,8 +1,9 @@
 var browserify  = require('browserify'),
     cover	    = require('gulp-coverage'),
     gulp	    = require('gulp'),
+    gutil	    = require('gulp-util'),
     jshint      = require('gulp-jshint'),
-    mocha	    = require('gulp-mocha')
+    mocha	    = require('gulp-mocha'),
     source	    = require('vinyl-source-stream')
 
 
@@ -27,7 +28,6 @@ gulp.task('lint', function(){
     return gulp.src([
             'src/**/*.js'
         ])
-        .on('error', err)
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(jshint.reporter(''))
@@ -44,7 +44,7 @@ gulp.task('test', function(){
 })
 
 
-gulp.task('coverage', function(){
+gulp.task('cover', function(){
     return gulp.src(['test/test*.js'], { read: false })
         .pipe(cover.instrument({
             pattern: [
@@ -58,6 +58,7 @@ gulp.task('coverage', function(){
             }
         }))
         .pipe(cover.report({
-            outFile: 'coverage.html'                                 
+            outFile: 'coverage.html',
+            reporter: 'html'
         }))
 })
