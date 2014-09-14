@@ -1,6 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Collection = require('js/KinView/collections/collection.js')
+    Collection = require('collections/collection.js')
 
 module.exports = Backbone.View.extend({
     exclusiveState: false,

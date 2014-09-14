@@ -1,6 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Model = require('js/KinView/Models/model.js')
+    Model = require('models/model.js')
 
 module.exports = Backbone.Collection.extend({
     model: Model,
