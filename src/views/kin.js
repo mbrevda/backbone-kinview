@@ -1,6 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Collection = require('collections/collection.js')
+    Collection = require('../collections/collection.js')
 
 module.exports = Backbone.View.extend({
     exclusiveState: false,
@@ -38,15 +38,14 @@ module.exports = Backbone.View.extend({
             
         }
     },
-    setState: function(model, state) {
-        model.set('state', state)
-    },
     stateChange: function(model) {
         // override this
     },
     remove: function() {
         this.children.removeAll()
-        this.superRemove()
+
+        // call original remove
+        this.constructor.__super__.remove.apply(this, arguments)
     }
 })
 

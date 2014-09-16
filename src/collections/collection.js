@@ -1,11 +1,11 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Model = require('models/model.js')
+    Model = require('../models/model.js')
 
 module.exports = Backbone.Collection.extend({
     model: Model,
     initialize: function(opts) {
-        this.stateSet = false
+        this.stateSet = false;
         this.once('change:state', this.toggleState)
     },
     removeAll: function() {
