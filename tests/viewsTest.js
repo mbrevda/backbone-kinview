@@ -31,9 +31,9 @@ describe('View', function(){
     
     it('Positioned at 0', function(){
         this.v.exclusiveState = true
-        this.v.add([{view: new Backbone.View()}])
+        this.v.add({view: new Backbone.View()})
         this.v.add(
-            [{view: new Backbone.View({className: 'test1'})}],
+            {view: new Backbone.View({className: 'test1'})},
             {at: 0, positioned: true}
         )
         
@@ -43,12 +43,11 @@ describe('View', function(){
     it('Positioned at 1', function(){
         this.v.exclusiveState = true
 
-        var view = Backbone.View.extend()
-        this.v.add([{view: new view()}])
-        this.v.add([{view: new view()}])
-        this.v.add([{view: new view()}])
+        this.v.add({view: new Backbone.View()})
+        this.v.add({view: new Backbone.View()})
+        this.v.add({view: new Backbone.View()})
         this.v.add(
-            [{view: new view({className: 'test1'})}],
+            {view: new Backbone.View({className: 'test1'})},
             {at: 1, positioned: true}
         )
 
@@ -59,12 +58,11 @@ describe('View', function(){
     it('Positioned at 2', function(){
         this.v.exclusiveState = true
 
-        var view = Backbone.View.extend()
-        this.v.add([{view: new view()}])
-        this.v.add([{view: new view()}])
-        this.v.add([{view: new view()}])
+        this.v.add({view: new Backbone.View()})
+        this.v.add({view: new Backbone.View()})
+        this.v.add({view: new Backbone.View()})
         this.v.add(
-            [{view: new view({className: 'test1'})}],
+            {view: new Backbone.View({className: 'test1'})},
             {at: 2, positioned: true}
         )
 
