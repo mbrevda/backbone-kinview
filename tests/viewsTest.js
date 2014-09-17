@@ -70,7 +70,7 @@ describe('View', function(){
 
     })
 
-    it('RemoveAll should remove all children', function(){
+    it('remove() should remove all children', function(){
         this.v.add([{view: new Backbone.View()}, {view: new Backbone.View()}])
         this.v.children.length.should.eql(2)
 
