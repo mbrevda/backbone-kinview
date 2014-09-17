@@ -1,5 +1,5 @@
 {
-  "name": "KinView",
+  "name": "backbone-kinview",
   "version": "0.0.1",
   "description": "A backbone.js view with built in lifecycle management of child views",
   "main": "index.js",
