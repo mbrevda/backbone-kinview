@@ -29,8 +29,47 @@ describe('View', function(){
         Backbone.$._data(view.$el[0], 'events').click.length.should.eql(1)
     })
     
-    it('Should position elements if position is set', function(){
-        true.should.be.false//todo: todo
+    it('Positioned at 0', function(){
+        this.v.exclusiveState = true
+        this.v.add([{view: new Backbone.View()}])
+        this.v.add(
+            [{view: new Backbone.View({className: 'test1'})}],
+            {at: 0, positioned: true}
+        )
+        
+        this.v.$el.children().eq(0).attr('class').should.eql('test1')
+    })
+
+    it('Positioned at 1', function(){
+        this.v.exclusiveState = true
+
+        var view = Backbone.View.extend()
+        this.v.add([{view: new view()}])
+        this.v.add([{view: new view()}])
+        this.v.add([{view: new view()}])
+        this.v.add(
+            [{view: new view({className: 'test1'})}],
+            {at: 1, positioned: true}
+        )
+
+        this.v.$el.children().eq(1).attr('class').should.eql('test1')
+
+    })
+
+    it('Positioned at 2', function(){
+        this.v.exclusiveState = true
+
+        var view = Backbone.View.extend()
+        this.v.add([{view: new view()}])
+        this.v.add([{view: new view()}])
+        this.v.add([{view: new view()}])
+        this.v.add(
+            [{view: new view({className: 'test1'})}],
+            {at: 2, positioned: true}
+        )
+
+        this.v.$el.children().eq(2).attr('class').should.eql('test1')
+
     })
 
     it('RemoveAll should remove all children', function(){

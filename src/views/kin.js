@@ -20,13 +20,12 @@ module.exports = Backbone.View.extend({
     add: function() {
         return this.children.add.apply(this.children, arguments)
     },
-    appendChild: function(model, collection, options) {
-        // first element or if positioning was not requested
-        if (!this.$el.children().length || !(options.positioned || false)) {
+    appendChild: function(model, collection, opts) {
+        if (!opts.positioned || !this.$el.children().length) {
             this.$el.append(model.get('view').$el)
         } else {
-            // specifically positioned element
-            this.$el.children().eq(options.at - 2).after(model.get('view').$el)
+            // at must be zero based; will fail if before el is not found
+            this.$el.children().eq(opts.at).before(model.get('view').$el)
         }
 
         // add a  handler if exclusivity is set
