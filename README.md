@@ -12,12 +12,12 @@ npm install backbone-kinview --save
 # Code
 
 ## CI
-KinView is tested by Wercker CI:
+KinView continuous integrations is handled by Wercker:
 
 [![wercker status](https://app.wercker.com/status/2efbc54680052f799976eec1a2d029cd/m "wercker status")](https://app.wercker.com/project/bykey/2efbc54680052f799976eec1a2d029cd)
 
 ## Testing
-To manually run the tests, install with with --dev (as above) and run:
+KinView proudly maintains 100% test coverage. To manually run the tests, install with with --dev (as above) and run:
 
 ```
 gulp testc
@@ -50,7 +50,6 @@ kin.add({view: new Backbone.View()})
 Sometimes you may wish to add a child element to the parent view *at a specific position*. With KinView thats easy to do:
 
 ```js
-// must always pass a 'view' param with a valid view!
 kin.add({
     view: new Backbone.View()
     at: 4,           // specify the position (zero index)
