@@ -57,6 +57,7 @@ kin.add({
     positioned: true // tells KinView that you want the element at the `at` position
 })
 ```
+Once set, a child cannot be repositioned.
 
 # State
 ## Setting state
@@ -77,7 +78,7 @@ kin.children.at(6).set('state', 'someState')
 ```
 
 ## Exclusivity
-KinView also offers state exclusivity (i.e. only a single view in a given collection can have the same view). If a KinView has state exclusivity, only **one** child view can hold that state an any given time. When a child's state is changed, all other children will have their state set to a default value. By default, state is binary (i.e. either true or false). To get more elaborate states, overwrite the Model used by the KinView.children collection, mainly the [`toggleValue()` ](https://github.com/mbrevda/backbone-kinview/blob/master/src/models/model.js#L18) method.
+KinView also offers state exclusivity (i.e. only a single view in a given collection can have the same view). If a KinView has state exclusivity, only **one** child view can hold that state an any given time. When a child's state is changed, all other children will have their state set to a default value. By default, state is binary (i.e. either true or false). To get more elaborate states, overwrite the Model used by the KinView.children collection, mainly the [`toggleValue()` ](https://github.com/mbrevda/backbone-kinview/blob/master/src/models/model.js#L18-L20) method.
 
 To activate exclusivity, when instantiate KinView sett `exclusiveState` to `true`:
 
