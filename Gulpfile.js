@@ -66,7 +66,7 @@ gulp.task('lint', function(){
         .pipe(jshint.reporter(''))
 })
 
-gulp.task('test', function(){
+gulp.task('test', ['lint'], function(){
     // set up window and jquery
     global.window = jsdom.jsdom('').parentWindow
     global.document = window.document
@@ -78,7 +78,7 @@ gulp.task('test', function(){
         }))
 })
 
-gulp.task('testc', function(){
+gulp.task('testc', ['lint'], function(){
     // set up window and jquery
     global.window = jsdom.jsdom('').parentWindow
     global.document = window.document
