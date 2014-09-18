@@ -62,7 +62,10 @@ Once set, a child cannot be repositioned.
 ### Setting state
 KinView can keep track of a view's state.
 
-State doesn't directly affect the view - it's simply 'metadata' that can be used to store what the state *should* be.
+State doesn't directly affect the view - it's simply 'metadata' that can be used to store what the state *should* be. Your view must listen to changes on the model in order to know when the
+state changes. This is a bit unconventional, as you need to first create a view, 
+then create a new child, passing it the view, and finally have the view listen
+to its model. See below for an example.
 
 Adding a view with a given state is simple:
 
@@ -96,7 +99,20 @@ var kin = new KinView.extend({
 })
 ```
 
-### Lifecycle
+### Updating the view when state changes
+As explained above, the view is never manipulated when its model changes. You must
+manually listen for changes on the model and update your view appropriately. This
+is a bit unconventional as the model cannot be directly passed to view. Here is 
+an example of how to have the view listening to the model:
+
+```js
+var model = kin.add({view: Backbone.View()})
+var view  = model.get('view')
+view.listenTo(model, 'change:state', view.changeHandler)
+```
+
+
+# Lifecycle
 KinView will automatically remove all views, calling their `remove()` method, when it is removed. If you have any elaborate cleanup you need to do in your children, be sure to add that the child's `remove()`. To remove KinView, just call `remove()`:
 
 ```js
