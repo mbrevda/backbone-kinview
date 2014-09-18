@@ -11,12 +11,12 @@ npm install backbone-kinview --save
 
 # Code
 
-## CI
+### CI
 KinView continuous integrations is handled by Wercker:
 
 [![wercker status](https://app.wercker.com/status/2efbc54680052f799976eec1a2d029cd/m "wercker status")](https://app.wercker.com/project/bykey/2efbc54680052f799976eec1a2d029cd)
 
-## Testing
+### Testing
 KinView proudly maintains 100% test coverage. To manually run the tests, install with with --dev (as above) and run:
 
 ```
@@ -25,11 +25,11 @@ gulp testc
 
 You can optionally generate an HTML code coverage report by appending the `--html` argument
 
-## Issues
+### Issues
 Issues can be opened in the [usual location](https://github.com/mbrevda/backbone-kinview/issues), pull requests welcome!
 
 # Usage
-## Getting started
+### Getting started
 
 Start by creating a new KinView:
 
@@ -46,7 +46,7 @@ You can now add one or more child view, which all be appended to the parent:
 kin.add({view: new Backbone.View()})
 ```
 
-## Positioning children in the parent
+### Positioning children in the parent
 Sometimes you may wish to add a child element to the parent view *at a specific position*. With KinView thats easy to do:
 
 ```js
@@ -59,7 +59,7 @@ kin.add({
 Once set, a child cannot be repositioned.
 
 # State
-## Setting state
+### Setting state
 KinView can keep track of a view's state.
 
 State doesn't directly affect the view - it's simply 'metadata' that can be used to store what the state *should* be.
@@ -76,7 +76,7 @@ To change a state, simply find the views model and set it's state:
 kin.children.at(6).set('state', 'someState')
 ```
 
-## Exclusivity
+### Exclusivity
 KinView also offers state exclusivity. When a KinView has state exclusivity, only **one** child view can hold a given state an any given time. When a child's state is changed, all other children will have their state set to a default value. By default, state is binary (i.e. either true or false). To get more elaborate states, overwrite the Model used by the KinView.children collection, mainly the [`toggleValue()` ](https://github.com/mbrevda/backbone-kinview/blob/master/src/models/model.js#L18-L20) method.
 
 To activate exclusivity, when instantiate KinView set `exclusiveState` to `true`:
@@ -96,7 +96,7 @@ var kin = new KinView.extend({
 })
 ```
 
-## Lifecycle
+### Lifecycle
 KinView will automatically remove all views, calling their `remove()` method, when it is removed. If you have any elaborate cleanup you need to do in your children, be sure to add that the child's `remove()`. To remove KinView, just call `remove()`:
 
 ```js
