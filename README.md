@@ -1,7 +1,7 @@
 # KinView
 **KinView** is a [Backbone.js](http://backbonejs.org) view that provides a simple api to manage child views and auto-appends them to the parent `$el`. It also allows for the child element to have a state attached to it, and [properly](http://backbonejs.org/#View-remove) removes the children when the parent is `remove()`ed.
 
-# Instalation
+# Installation
 
 KinView has been designed to ```require```'d by [browserify](http://browserify.org/), and is currently only supported in that environment. To install:
 
@@ -51,7 +51,7 @@ Sometimes you may wish to add a child element to the parent view *at a specific 
 
 ```js
 kin.add({
-    view: new Backbone.View()
+    view: new Backbone.View(),
     at: 4,           // specify the position (zero index)
     positioned: true // tells KinView that you want the element at the `at` position
 })
@@ -77,9 +77,9 @@ kin.children.at(6).set('state', 'someState')
 ```
 
 ## Exclusivity
-KinView also offers state exclusivity (i.e. only a single view in a given collection can have the same view). If a KinView has state exclusivity, only **one** child view can hold that state an any given time. When a child's state is changed, all other children will have their state set to a default value. By default, state is binary (i.e. either true or false). To get more elaborate states, overwrite the Model used by the KinView.children collection, mainly the [`toggleValue()` ](https://github.com/mbrevda/backbone-kinview/blob/master/src/models/model.js#L18-L20) method.
+KinView also offers state exclusivity. When a KinView has state exclusivity, only **one** child view can hold a given state an any given time. When a child's state is changed, all other children will have their state set to a default value. By default, state is binary (i.e. either true or false). To get more elaborate states, overwrite the Model used by the KinView.children collection, mainly the [`toggleValue()` ](https://github.com/mbrevda/backbone-kinview/blob/master/src/models/model.js#L18-L20) method.
 
-To activate exclusivity, when instantiate KinView sett `exclusiveState` to `true`:
+To activate exclusivity, when instantiate KinView set `exclusiveState` to `true`:
 
 ```js
 var kin = new KinView.extend({
