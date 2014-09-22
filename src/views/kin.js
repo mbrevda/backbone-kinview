@@ -7,7 +7,7 @@ module.exports = Backbone.View.extend({
     exclusiveEvent: 'click',
     constructor: function(a, b) {
         this.children = new Collection()
-        
+
         this.listenTo(this.children, 'add', this.appendChild)
         this.listenTo(
             this.children,
@@ -15,7 +15,9 @@ module.exports = Backbone.View.extend({
             this.stateChange
         )
 
-        Backbone.View.apply(this, arguments); 
+        Backbone.View.apply(this, arguments);
+
+        this.superRemove = Backbone.View.prototype.remove
     },
     add: function() {
         return this.children.add.apply(this.children, arguments)
@@ -34,7 +36,7 @@ module.exports = Backbone.View.extend({
                 this.exclusiveEvent,
                 _.bind(model.toggleState, model)
             )
-            
+
         }
     },
     stateChange: function(model) {
@@ -44,7 +46,6 @@ module.exports = Backbone.View.extend({
         this.children.removeAll()
 
         // call original remove
-        this.constructor.__super__.remove.apply(this, arguments)
+        this.superRemove()
     }
 })
-
