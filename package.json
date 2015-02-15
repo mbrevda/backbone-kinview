@@ -1,6 +1,6 @@
 {
   "name": "backbone-kinview",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "A backbone.js view with built in lifecycle management of child views",
   "main": "index.js",
   "directories": {
