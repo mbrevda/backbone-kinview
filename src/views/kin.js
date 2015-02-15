@@ -17,6 +17,12 @@ module.exports = Backbone.View.extend({
             this.stateChange
         )
 
+        this.listenTo(this.children, 'stateChange', function(){
+            var args = Array.prototype.slice.call(arguments)
+            args.unshift('stateChange')
+            this.trigger.apply(this, args)
+        })
+
         Backbone.View.apply(this, arguments);
 
         this.superRemove = Backbone.View.prototype.remove
