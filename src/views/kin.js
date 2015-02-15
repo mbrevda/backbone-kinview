@@ -2,6 +2,8 @@ var Backbone = require('backbone'),
     _ = require('underscore'),
     Collection = require('../collections/collection.js')
 
+Backbone.$ = require('jquery')
+
 module.exports = Backbone.View.extend({
     exclusiveState: false,
     exclusiveEvent: 'click',
