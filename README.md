@@ -34,6 +34,8 @@ Issues can be opened in the [usual location](https://github.com/mbrevda/backbone
 Start by creating a new KinView:
 
 ```js
+var KinView = require('backbone-kinview')
+
 var kin = new KinView.extend({
     // regular Backbone.View opts here
 })

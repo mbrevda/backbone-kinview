@@ -4,9 +4,14 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Collection.extend({
     model: Model,
-    initialize: function(opts) {
+    initialize: function(models, opts) {
+        this.exclusiveState = opts && opts.exclusiveState || false
         this.stateSet = false;
         this.once('change:state', this.toggleState)
+
+        if (models) {
+            this.reset(models, _.extend({silent: true}, opts))
+        }
     },
     removeAll: function() {
         this.remove(this.models)
@@ -22,8 +27,13 @@ module.exports = Backbone.Collection.extend({
 
             child.set('state', null)
         })
-        
+
         // listen for changes again
         this.once('change:state', this.toggleState)
+
+        // trigger stateChange event if state is exclusive
+        if (this.exclusiveState) {
+            this.trigger('stateChange', changed)
+        }
     }
 })

@@ -30,6 +30,28 @@ describe('Collections', function() {
         should.not.exist(this.model1.get('state'))
     })
 
+    it('Should trigger stateChange for exclusive state', function(done){
+        this.c.exclusiveState = true
+
+        this.c.on('stateChange', function(model) {
+            model.get('state').should.be.ok
+            done()
+        })
+
+        this.model1.set('state', true)
+    })
+
+    it('Should not trigger stateChange for nonexclusive state', function(done){
+        var time = setImmediate(done)
+
+        this.c.on('stateChange', function(model) {
+            done(new Error('Should never be called!'))
+        })
+
+        this.model1.set('state', true)
+
+    })
+
     it('removeAll', function() {
         this.c.removeAll()
 
