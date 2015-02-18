@@ -10,12 +10,9 @@ module.exports = Backbone.View.extend({
     constructor: function() {
         this.children = new Collection([], {exclusiveState: this.exclusiveState})
 
+
         this.listenTo(this.children, 'add', this.appendChild)
-        this.listenTo(
-            this.children,
-            'change:state',
-            this.stateChange
-        )
+        this.listenTo(this.children, 'change:state', this.stateChange)
 
         this.listenTo(this.children, 'stateChange', function(){
             var args = Array.prototype.slice.call(arguments)
@@ -26,12 +23,13 @@ module.exports = Backbone.View.extend({
         Backbone.View.apply(this, arguments);
 
         this.superRemove = Backbone.View.prototype.remove
+
     },
     add: function() {
         return this.children.add.apply(this.children, arguments)
     },
     appendChild: function(model, collection, opts) {
-        if (!opts.positioned || !this.$el.children().length) {
+        if (!opts || !opts.positioned || !this.$el.children().length) {
             this.$el.append(model.get('view').$el)
         } else {
             // at must be zero based; will fail if before el is not found
@@ -46,6 +44,8 @@ module.exports = Backbone.View.extend({
             )
 
         }
+
+        return model
     },
     stateChange: function(model) {
         // override this
