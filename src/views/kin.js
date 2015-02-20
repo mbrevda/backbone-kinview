@@ -8,9 +8,10 @@ module.exports = Backbone.View.extend({
     exclusiveState: false,
     exclusiveEvent: 'click',
     constructor: function() {
+        // super()
+        Backbone.View.apply(this, arguments);
+
         this.children = new Collection([], {exclusiveState: this.exclusiveState})
-
-
         this.listenTo(this.children, 'add', this.appendChild)
         this.listenTo(this.children, 'change:state', this.stateChange)
 
@@ -20,7 +21,6 @@ module.exports = Backbone.View.extend({
             this.trigger.apply(this, args)
         })
 
-        Backbone.View.apply(this, arguments);
 
         this.superRemove = Backbone.View.prototype.remove
 
