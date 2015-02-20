@@ -8,10 +8,12 @@ module.exports = Backbone.View.extend({
     exclusiveState: false,
     exclusiveEvent: 'click',
     constructor: function() {
+        // define children first
+        this.children = new Collection([], {exclusiveState: this.exclusiveState})
+
         // super()
         Backbone.View.apply(this, arguments);
 
-        this.children = new Collection([], {exclusiveState: this.exclusiveState})
         this.listenTo(this.children, 'add', this.appendChild)
         this.listenTo(this.children, 'change:state', this.stateChange)
 
