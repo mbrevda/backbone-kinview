@@ -52,20 +52,64 @@ kin.add({view: new Backbone.View()})
 Sometimes you may wish to add a child element to the parent view *at a specific position*. With KinView thats easy to do:
 
 ```js
-kin.add({
-    view: new Backbone.View(),
-    at: 4,           // specify the position (zero index)
-    positioned: true // tells KinView that you want the element at the `at` position
-})
+kin.add(
+    {view: new Backbone.View()},
+    {
+        at: 4,           // specify the position (zero index)
+        positioned: true // tells KinView that you want the element at the `at` position
+    }
+)
 ```
 Once set, a child cannot be repositioned.
+
+### Positioning a child in a subelement
+Add a view directly to the parent is useful when children view are the *only* element in the parent, like this:
+
+```html
+<div class="parent">
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+</div>
+```
+
+If the parent view has a template or an otherwise compartmentalized hierarchy, you can specify where in the parent a given child should be appended to, use the `to` option. Pass a selector string thats relative to the parent. `to` delegates to Backbone's [`view.$(selector)`](http://backbonejs.org/#View-dollar) method:
+
+```js
+var KinView = require('backbone-kinview')
+
+var kin = new KinView.extend({
+    template: _.template('<div class="parent">'
+        + '<div class="child1"></div>'
+        + '<div class="child2"></div>'
+        + '</div>'),
+    initialize: function() {
+        this.render()
+    },
+    render: function() {
+        this.$el.html(this.template())
+
+        // add child1
+        this.add(
+            {view: new Backbone.View()}
+            {to: '.child1'}
+        )
+
+        // add child2
+        this.add(
+            {view: new Backbone.View()}
+            {to: '.child2'}
+        )
+    }
+})
+```
 
 # State
 ### Setting state
 KinView can keep track of a view's state.
 
 State doesn't directly affect the view - it's simply 'metadata' that can be used to store what the state *should* be. Your view must listen to changes on the model in order to know when the
-state changes. This is a bit unconventional, as you need to first create a view, 
+state changes. This is a bit unconventional, as you need to first create a view,
 then create a new child, passing it the view, and finally have the view listen
 to its model. See below for an example.
 
@@ -104,7 +148,7 @@ var kin = new KinView.extend({
 ### Updating the view when state changes
 As explained above, the view is never manipulated when its model changes. You must
 manually listen for changes on the model and update your view appropriately. This
-is a bit unconventional as the model cannot be directly passed to view. Here is 
+is a bit unconventional as the model cannot be directly passed to view. Here is
 an example of how to have the view listening to the model:
 
 ```js
@@ -120,10 +164,3 @@ KinView will automatically remove all views, calling their `remove()` method, wh
 ```js
 kin.remove()
 ```
-
-
-
-
-
-
-
