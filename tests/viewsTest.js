@@ -43,8 +43,6 @@ describe('View', function(){
 
         var view = new MyView()
 
-        //view.$el.children().eq(0).attr('class').should.eql('child')
-        //console.log()
         jsdom.serializeDocument(view.$el[0])
             .should.eql('<div><div class="child"></div></div>')
     })
