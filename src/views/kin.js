@@ -31,11 +31,14 @@ module.exports = Backbone.View.extend({
         return this.children.add.apply(this.children, arguments)
     },
     appendChild: function(model, collection, opts) {
+        // check to see if a location (relative to the parent) is specified
+        var el = opts.to ? this.$(opts.to) : this.$el
+
         if (!opts || !opts.positioned || !this.$el.children().length) {
-            this.$el.append(model.get('view').$el)
+            el.append(model.get('view').$el)
         } else {
             // at must be zero based; will fail if before el is not found
-            this.$el.children().eq(opts.at).before(model.get('view').$el)
+            el.children().eq(opts.at).before(model.get('view').$el)
         }
 
         // add a  handler if exclusivity is set

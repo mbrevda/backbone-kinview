@@ -78,4 +78,17 @@ describe('View', function(){
 
         this.v.children.length.should.eql(0)
     })
+    
+    it('Attach to', function(){
+        this.v.exclusiveState = true
+        this.v.$el.append('<div class="container"/>')
+        this.v.add(
+            {view: new Backbone.View({className: 'test1'})},
+            {to: '.container'}
+        )
+
+        this.v.$el.html()
+            .should.eql('<div class="container"><div class="test1"></div></div>')
+
+    })
 })
