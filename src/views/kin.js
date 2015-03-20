@@ -11,18 +11,19 @@ module.exports = Backbone.View.extend({
         // define children first
         this.children = new Collection([], {exclusiveState: this.exclusiveState})
 
-        // super()
-        Backbone.View.apply(this, arguments);
-
+        // listenters must be set before apply() is called
         this.listenTo(this.children, 'add', this.appendChild)
         this.listenTo(this.children, 'change:state', this.stateChange)
 
+        // proxy stateChange to children
         this.listenTo(this.children, 'stateChange', function(){
             var args = Array.prototype.slice.call(arguments)
             args.unshift('stateChange')
             this.trigger.apply(this, args)
         })
 
+        // super()
+        Backbone.View.apply(this, arguments);
 
         this.superRemove = Backbone.View.prototype.remove
 

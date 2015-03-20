@@ -1,5 +1,6 @@
 var should = require('should'),
-    Backbone = require('backbone')
+    Backbone = require('backbone'),
+    jsdom = require('jsdom')
 
 Backbone.$ = global.window.$
 var View = require('../index.js')
@@ -7,7 +8,7 @@ var View = require('../index.js')
 describe('View', function(){
     beforeEach(function(){
         this.v = new View({})
-    }) 
+    })
 
     it('Add should return a model', function(){
         (this.v.add({view: new Backbone.View()}) instanceof Backbone.Model)
@@ -20,7 +21,7 @@ describe('View', function(){
             that.v.add({})
         }).should.throwError('Cannot read property \'$el\' of null')
     })
-    
+
    it('Should attach an event if exclusiveState is true', function() {
         this.v.exclusiveState = true
         var m = this.v.add({view: new Backbone.View()})
@@ -28,7 +29,26 @@ describe('View', function(){
 
         Backbone.$._data(view.$el[0], 'events').click.length.should.eql(1)
     })
-    
+
+    it('Add from inside the view', function(){
+        var Child = Backbone.View.extend({className: 'child'})
+        var MyView = View.extend({
+            initialize: function(){
+                this.render()
+            },
+            render: function() {
+                this.add({view: new Child()})
+            }
+        })
+
+        var view = new MyView()
+
+        //view.$el.children().eq(0).attr('class').should.eql('child')
+        //console.log()
+        jsdom.serializeDocument(view.$el[0])
+            .should.eql('<div><div class="child"></div></div>')
+    })
+
     it('Positioned at 0', function(){
         this.v.exclusiveState = true
         this.v.add({view: new Backbone.View()})
@@ -36,7 +56,7 @@ describe('View', function(){
             {view: new Backbone.View({className: 'test1'})},
             {at: 0, positioned: true}
         )
-        
+
         this.v.$el.children().eq(0).attr('class').should.eql('test1')
     })
 
@@ -78,7 +98,7 @@ describe('View', function(){
 
         this.v.children.length.should.eql(0)
     })
-    
+
     it('Attach to', function(){
         this.v.exclusiveState = true
         this.v.$el.append('<div class="container"/>')
