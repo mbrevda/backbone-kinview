@@ -1,9 +1,9 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    Collection = require('../collections/collection.js'),
-    NativeView = require('backbone.nativeview')
+    Collection = require('../collections/collection.js')
+    //NativeView = require('backbone.nativeview')
 
-module.exports = NativeView.extend({
+module.exports = Backbone.View.extend({
     exclusiveState: false,
     exclusiveEvent: 'click',
     constructor: function() {
@@ -32,7 +32,7 @@ module.exports = NativeView.extend({
     },
     appendChild: function(model, collection, opts) {
         // check to see if a location (relative to the parent) is specified
-        var el = opts.to ? this.el.querySelector(opts.to) : this.el
+        var el = opts.to ? this.$(opts.to)[0] : this.el
 
         if (!opts || !opts.positioned || !this.el.children.length || !('at' in opts)) {
             el.appendChild(model.get('view').el)
@@ -43,7 +43,7 @@ module.exports = NativeView.extend({
 
         // add a  handler if exclusivity is set
         if (this.exclusiveState && model.get('hasState')) {
-            model.get('view').el.addEventListener(
+            model.get('view').delegate(
                 this.exclusiveEvent,
                 _.bind(model.toggleState, model)
             )
