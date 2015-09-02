@@ -2,8 +2,8 @@ var should = require('should'),
     Backbone = require('backbone'),
     jsdom = require('jsdom')
 
-Backbone.$ = global.window.$
 var View = require('../index.js')
+var Model = require('../index.js').models.model
 
 describe('View', function(){
     beforeEach(function(){
@@ -19,15 +19,20 @@ describe('View', function(){
         var that = this;
         (function(){
             that.v.add({})
-        }).should.throwError('Cannot read property \'$el\' of null')
+        }).should.throwError('Cannot read property \'el\' of null')
     })
 
-   it('Should attach an event if exclusiveState is true', function() {
+   it('Should attach an event if exclusiveState is true', function(done) {
         this.v.exclusiveState = true
+        this.v.children.model = Model.extend({toggleState: function(){
+            done()
+        }})
         var m = this.v.add({view: new Backbone.View()})
         var view = m.get('view')
 
-        Backbone.$._data(view.$el[0], 'events').click.length.should.eql(1)
+        var click = new window.Event('MouseEvents')
+        click.initEvent('click', true, true);
+        view.el.dispatchEvent(click)
     })
 
     it('Add from inside the view', function(){
@@ -43,19 +48,19 @@ describe('View', function(){
 
         var view = new MyView()
 
-        jsdom.serializeDocument(view.$el[0])
+        jsdom.serializeDocument(view.el)
             .should.eql('<div><div class="child"></div></div>')
     })
 
     it('Positioned at 0', function(){
         this.v.exclusiveState = true
         this.v.add({view: new Backbone.View()})
-        this.v.add(
+        var m = this.v.add(
             {view: new Backbone.View({className: 'test1'})},
             {at: 0, positioned: true}
         )
 
-        this.v.$el.children().eq(0).attr('class').should.eql('test1')
+        this.v.el.children[0].getAttribute('class').should.eql('test1')
     })
 
     it('Positioned at 1', function(){
@@ -69,8 +74,7 @@ describe('View', function(){
             {at: 1, positioned: true}
         )
 
-        this.v.$el.children().eq(1).attr('class').should.eql('test1')
-
+        this.v.el.children[1].getAttribute('class').should.eql('test1')
     })
 
     it('Positioned at 2', function(){
@@ -84,8 +88,7 @@ describe('View', function(){
             {at: 2, positioned: true}
         )
 
-        this.v.$el.children().eq(2).attr('class').should.eql('test1')
-
+        this.v.el.children[2].getAttribute('class').should.eql('test1')
     })
 
     it('remove() should remove all children', function(){
@@ -99,13 +102,16 @@ describe('View', function(){
 
     it('Attach to', function(){
         this.v.exclusiveState = true
-        this.v.$el.append('<div class="container"/>')
+        var div =  document.createElement('div')
+        div.className = 'container'
+
+        this.v.el.insertBefore(div,  this.v.el.nextSibling)
         this.v.add(
             {view: new Backbone.View({className: 'test1'})},
             {to: '.container'}
         )
 
-        this.v.$el.html()
+        this.v.el.innerHTML
             .should.eql('<div class="container"><div class="test1"></div></div>')
 
     })

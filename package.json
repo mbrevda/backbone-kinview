@@ -28,8 +28,8 @@
   "homepage": "https://github.com/mbrevda/backbone-kinview",
   "dependencies": {
     "backbone": "^1.2",
-    "jquery": "^2.1.1",
-    "underscore": "^1.7.0"
+    "backbone.nativeview": "^0",
+    "underscore": "^1.8"
   },
   "devDependencies": {
     "browserify": "^11",
