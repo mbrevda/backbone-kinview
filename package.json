@@ -27,23 +27,23 @@
   },
   "homepage": "https://github.com/mbrevda/backbone-kinview",
   "dependencies": {
-    "backbone": "^1.1.2",
+    "backbone": "^1.2",
     "jquery": "^2.1.1",
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "browserify": "^5.11.2",
+    "browserify": "^11",
     "gulp": "^3.8.8",
     "gulp-coverage": "^0.3.27",
     "gulp-if": "^1.2.4",
     "gulp-jshint": "^1.8.4",
-    "gulp-mocha": "^1.1.0",
+    "gulp-mocha": "^2",
     "gulp-util": "^3.0.1",
     "jsdom": "^3",
     "minimist": "^1.1.0",
-    "mocha": "^1.21.4",
-    "should": "^4.0.4",
-    "through2": "^0.6.1",
+    "mocha": "^2",
+    "should": "^7",
+    "through2": "^2",
     "vinyl-source-stream": "^1.0.0"
   }
 }
