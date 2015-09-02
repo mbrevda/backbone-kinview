@@ -70,7 +70,6 @@ gulp.task('test', ['lint'], function(){
     // set up window and jquery
     global.window = jsdom.jsdom('').parentWindow
     global.document = window.document
-    global.window.$ = require('jquery')
 
     return gulp.src(['tests/*Test.js'], { read: false })
         .pipe(mocha({
@@ -82,7 +81,6 @@ gulp.task('testc', ['lint'], function(){
     // set up window and jquery
     global.window = jsdom.jsdom('').parentWindow
     global.document = window.document
-    global.window.$ = require('jquery')
 
     return gulp.src(['tests/*Test.js'], { read: false })
         .pipe(gulpif(args.cover, cover.instrument({
