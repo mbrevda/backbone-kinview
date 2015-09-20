@@ -1,6 +1,6 @@
 {
   "name": "backbone-kinview",
-  "version": "0.0.27",
+  "version": "1.0.0",
   "description": "A backbone.js view with built in lifecycle management of child views",
   "main": "index.js",
   "directories": {
@@ -28,18 +28,18 @@
   "homepage": "https://github.com/mbrevda/backbone-kinview",
   "dependencies": {
     "backbone": "^1.2",
-    "jquery": "^2.1.4",
     "underscore": "^1.8"
   },
   "devDependencies": {
     "browserify": "^11",
+    "jquery": "^2.1.4",
     "gulp": "^3.8.8",
     "gulp-coverage": "^0.3.27",
     "gulp-if": "^1.2.4",
     "gulp-jshint": "^1.8.4",
     "gulp-mocha": "^2",
     "gulp-util": "^3.0.1",
-    "jsdom": "^3",
+    "jsdom": "^6",
     "minimist": "^1.1.0",
     "mocha": "^2",
     "should": "^7",
