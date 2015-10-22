@@ -1,7 +1,8 @@
-box: wercker/nodejs
+box: node
 build:
     steps:
         - npm-install
+    options: --logelevel=warn
         - npm-test
 deploy:
     steps:
