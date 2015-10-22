@@ -2,7 +2,7 @@ box: node
 build:
     steps:
         - npm-install:
-            options: --logelevel=warn
+            options: --loglevel=warn
         - npm-test
 deploy:
     steps:
